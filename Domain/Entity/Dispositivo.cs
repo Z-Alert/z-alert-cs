@@ -11,13 +11,13 @@
 
         private Dispositivo(string tipoDisposit, string statusDisposit, Dependente dependente)
         {
-            TipoDisposit = tipoDisposit?.Length > 50
-                ? throw new DomainException("Tipo do dispositivo deve ter no máximo 50 caracteres")
-                : tipoDisposit ?? throw new DomainException("Tipo do dispositivo é obrigatório");
+            TipoDisposit = string.IsNullOrWhiteSpace(tipoDisposit) || tipoDisposit.Length > 50
+                ? throw new DomainException("Tipo de dispositivo inválido")
+                : tipoDisposit;
 
-            StatusDisposit = statusDisposit?.Length > 20
-                ? throw new DomainException("Status do dispositivo deve ter no máximo 20 caracteres")
-                : statusDisposit ?? throw new DomainException("Status do dispositivo é obrigatório");
+            StatusDisposit = string.IsNullOrWhiteSpace(statusDisposit) || statusDisposit.Length > 20
+                ? throw new DomainException("Status de dispositivo inválido")
+                : statusDisposit;
 
             Dependente = dependente ?? throw new DomainException("Dependente é obrigatório");
         }

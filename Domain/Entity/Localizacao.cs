@@ -6,22 +6,25 @@
     public class Localizacao
     {
         public int IdLocali { get; private set; }
-        public double LatLocali { get; private set; }
-        public double LngLocali { get; private set; }
+        public decimal LatLocali { get; private set; }
+        public decimal LngLocali { get; private set; }
         public DateTime DataHora { get; private set; }
         public Dependente Dependente { get; private set; }
 
-        private Localizacao(double latLocali, double lngLocali, DateTime dataHora, Dependente dependente)
+        private Localizacao(decimal lat, decimal lng, DateTime dataHora, Dependente dependente)
         {
-            LatLocali = latLocali;
-            LngLocali = lngLocali;
+            if (lat < -90 || lat > 90) throw new DomainException("Latitude inválida");
+            if (lng < -180 || lng > 180) throw new DomainException("Longitude inválida");
+
+            LatLocali = lat;
+            LngLocali = lng;
             DataHora = dataHora;
             Dependente = dependente ?? throw new DomainException("Dependente é obrigatório");
         }
 
-        internal static Localizacao Create(double latLocali, double lngLocali, DateTime dataHora, Dependente dependente)
+        internal static Localizacao Create(decimal lat, decimal lng, DateTime dataHora, Dependente dependente)
         {
-            return new Localizacao(latLocali, lngLocali, dataHora, dependente);
+            return new Localizacao(lat, lng, dataHora, dependente);
         }
 
         public Localizacao() { }
