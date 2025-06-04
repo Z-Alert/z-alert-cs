@@ -1,0 +1,17 @@
+using System.ComponentModel.DataAnnotations;
+
+namespace ZAlert.Api.Application.DTOs;
+
+public class LocalizacaoDto
+{
+    [Required]
+    [Range(-90, 90)]
+    public double LatLocali { get; set; }
+
+    [Required]
+    [Range(-180, 180)]
+    public double LngLocali { get; set; }
+
+    [Required]
+    public int DependenteId { get; set; }
+}
