@@ -1,6 +1,7 @@
 using ZAlert.Api.Application.DTOs;
 using ZAlert.Api.Domain.Entity;
 using ZAlert.Api.Infrastructure.Repository;
+using ZAlert.Api.Domain.Exceptions;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

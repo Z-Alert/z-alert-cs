@@ -6,11 +6,11 @@ public class LocalizacaoDto
 {
     [Required]
     [Range(-90, 90)]
-    public double LatLocali { get; set; }
+    public decimal LatLocali { get; set; }
 
     [Required]
     [Range(-180, 180)]
-    public double LngLocali { get; set; }
+    public decimal LngLocali { get; set; }
 
     [Required]
     public int DependenteId { get; set; }

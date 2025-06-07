@@ -33,5 +33,11 @@ namespace ZAlert.Api.Infrastructure.Repository
             _context.Alertas.Remove(alerta);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<Alerta>> GetAllAsync(int skip, int take) =>
+            await _context.Alertas.Include(a => a.Dependente)
+                                  .Skip(skip)
+                                  .Take(take)
+                                  .ToListAsync();
     }
 }

@@ -12,4 +12,7 @@ public interface IAlertaRepository
 	Task<long> CountByStatusAsync(string status);
 	Task AddAsync(Alerta alerta);
 	Task SaveChangesAsync();
+
+    Task<List<Alerta>> GetAllAsync(int skip, int take);
+    Task DeleteAsync(Alerta alerta);
 }

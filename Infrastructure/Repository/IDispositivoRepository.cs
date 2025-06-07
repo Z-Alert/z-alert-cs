@@ -10,4 +10,8 @@ public interface IDispositivoRepository
     Task<Dispositivo?> GetByTipoAsync(string tipo);
     Task AddAsync(Dispositivo dispositivo);
     Task SaveChangesAsync();
+
+    Task DeleteAsync(Dispositivo dispositivo);
+    Task<List<Dispositivo>> GetAllAsync(int skip, int take);
+
 }

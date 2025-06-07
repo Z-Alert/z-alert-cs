@@ -2,11 +2,14 @@ namespace ZAlert.Api.Domain.Entity
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using ZAlert.Api.Domain.Exceptions;
 
     public class Dependente
     {
+        [Key]
         public int IdDepen { get; private set; }
+
         public string NmDepen { get; private set; }
         public string Tipo { get; private set; }
         public int IdadeDepen { get; private set; }
@@ -36,5 +39,27 @@ namespace ZAlert.Api.Domain.Entity
         }
 
         public Dependente() { }
+
+        public void SetNmDepen(string nome)
+        {
+            NmDepen = string.IsNullOrWhiteSpace(nome) || nome.Length > 100
+                ? throw new DomainException("Nome inválido") : nome;
+        }
+
+        public void SetTipo(string tipo)
+        {
+            Tipo = string.IsNullOrWhiteSpace(tipo) || tipo.Length > 30
+                ? throw new DomainException("Tipo inválido") : tipo;
+        }
+
+        public void SetIdadeDepen(int idade)
+        {
+            IdadeDepen = idade >= 0 ? idade : throw new DomainException("Idade inválida");
+        }
+
+        public void SetUsuario(Usuario usuario)
+        {
+            Usuario = usuario ?? throw new DomainException("Usuário é obrigatório");
+        }
     }
 }

@@ -11,4 +11,7 @@ public interface ILocalizacaoRepository
     Task<List<Localizacao>> GetRecentByDependenteIdAsync(int dependenteId, int count);
     Task AddAsync(Localizacao localizacao);
     Task SaveChangesAsync();
+
+    Task DeleteAsync(Localizacao localizacao);
+    Task<List<Localizacao>> GetAllAsync(int skip, int take);
 }

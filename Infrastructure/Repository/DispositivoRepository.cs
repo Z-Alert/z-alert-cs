@@ -14,6 +14,12 @@ namespace ZAlert.Api.Infrastructure.Repository
         public async Task<Dispositivo?> GetByIdAsync(int id) =>
             await _context.Dispositivos.Include(d => d.Dependente).FirstOrDefaultAsync(d => d.IdDisposit == id);
 
+        public async Task<Dispositivo?> GetByDependenteIdAsync(int dependenteId) =>
+            await _context.Dispositivos.Include(d => d.Dependente).FirstOrDefaultAsync(d => d.Dependente.IdDepen == dependenteId);
+
+        public async Task<Dispositivo?> GetByTipoAsync(string tipo) =>
+            await _context.Dispositivos.FirstOrDefaultAsync(d => d.TipoDisposit == tipo);
+
         public async Task AddAsync(Dispositivo dispositivo) => await _context.Dispositivos.AddAsync(dispositivo);
 
         public async Task SaveChangesAsync() => await _context.SaveChangesAsync();
@@ -23,5 +29,11 @@ namespace ZAlert.Api.Infrastructure.Repository
             _context.Dispositivos.Remove(dispositivo);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<Dispositivo>> GetAllAsync(int skip, int take) =>
+            await _context.Dispositivos.Include(d => d.Dependente)
+                                       .Skip(skip)
+                                       .Take(take)
+                                       .ToListAsync();
     }
 }

@@ -11,4 +11,7 @@ public interface IDependenteRepository
     Task<List<Dependente>> GetByTipoAsync(string tipo);
     Task AddAsync(Dependente dependente);
     Task SaveChangesAsync();
+
+    Task<List<Dependente>> GetAllAsync(int skip, int take);
+    Task DeleteAsync(Dependente dependente);
 }

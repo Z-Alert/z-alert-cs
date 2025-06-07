@@ -8,7 +8,9 @@
 
     public class Usuario
     {
+        [Key]
         public int IdUsu { get; private set; }
+
         public string NmUsu { get; private set; }
         public string EmailUsu { get; private set; }
         public string SenhaUsu { get; private set; }
@@ -35,5 +37,24 @@
         }
 
         public Usuario() { }
+
+        public void SetNmUsu(string nome)
+        {
+            NmUsu = string.IsNullOrWhiteSpace(nome) || nome.Length > 60
+                ? throw new DomainException("Nome inválido") : nome;
+        }
+
+        public void SetEmailUsu(string email)
+        {
+            EmailUsu = string.IsNullOrWhiteSpace(email) || email.Length > 100
+                ? throw new DomainException("Email inválido") : email;
+        }
+
+        public void SetSenhaUsu(string senha)
+        {
+            SenhaUsu = string.IsNullOrWhiteSpace(senha) || senha.Length > 100
+                ? throw new DomainException("Senha inválida") : senha;
+        }
+
     }
 }

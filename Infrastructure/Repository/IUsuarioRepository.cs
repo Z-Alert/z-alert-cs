@@ -10,4 +10,7 @@ public interface IUsuarioRepository
     Task<bool> ExistsByEmailAsync(string email);
     Task AddAsync(Usuario usuario);
     Task SaveChangesAsync();
+
+    Task DeleteAsync(Usuario usuario);
+    Task<List<Usuario>> GetAllAsync(int skip, int take);
 }

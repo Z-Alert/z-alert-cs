@@ -14,6 +14,12 @@ namespace ZAlert.Api.Infrastructure.Repository
         public async Task<Usuario?> GetByIdAsync(int id) =>
             await _context.Usuarios.Include(u => u.Dependentes).FirstOrDefaultAsync(u => u.IdUsu == id);
 
+        public async Task<Usuario?> GetByEmailAsync(string email) =>
+            await _context.Usuarios.FirstOrDefaultAsync(u => u.EmailUsu == email);
+
+        public async Task<bool> ExistsByEmailAsync(string email) =>
+            await _context.Usuarios.AnyAsync(u => u.EmailUsu == email);
+
         public async Task AddAsync(Usuario usuario) => await _context.Usuarios.AddAsync(usuario);
 
         public async Task SaveChangesAsync() => await _context.SaveChangesAsync();
@@ -23,5 +29,11 @@ namespace ZAlert.Api.Infrastructure.Repository
             _context.Usuarios.Remove(usuario);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<Usuario>> GetAllAsync(int skip, int take) =>
+            await _context.Usuarios.Include(u => u.Dependentes)
+                                   .Skip(skip)
+                                   .Take(take)
+                                   .ToListAsync();
     }
 }
